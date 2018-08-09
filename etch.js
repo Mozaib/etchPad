@@ -1,3 +1,5 @@
+let pixelCount = 32;
+
 function createGrid(cols){ 
     let e = document.getElementById('grid');
     for(let i = 0; i < cols; i++){ 
@@ -22,11 +24,23 @@ function darkenPixel() {
         this.style.opacity = incrementedOpacity;
 }
 
-function resetGrid() {
+function changeGrid(){
+    let enteredValue = window.prompt("Enter grid size i.e. 16 or 32");
+    if (enteredValue < 2 || enteredValue > 100) {
+        alert("Value has to be inbetween 2 and 100");
+    } else {
+        pixelCount = enteredValue;
+        resetGrid(pixelCount)
+    }
+}
+
+
+
+function resetGrid(pixelCount) {
     while(grid.hasChildNodes()){
         grid.removeChild(grid.lastChild);
     }
-    createGrid(16);
+    createGrid(pixelCount);
 }
 
-createGrid(32);
+createGrid(pixelCount);
