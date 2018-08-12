@@ -1,4 +1,6 @@
 let pixelCount = 32;
+const resetBtn = document.querySelector('.resetBtn');
+const chooseGridBtn = document.querySelector('.changeBtn');
 
 function createGrid(cols){ 
     let e = document.getElementById('grid');
@@ -9,7 +11,7 @@ function createGrid(cols){
           let cell = document.createElement("div"); 
           cell.className = "gridsquare"; 
           cell.addAttribute = ""
-          cell.innerText = '0';
+          cell.innerText = '';
           col.appendChild(cell); 
           cell.addEventListener('mouseover', darkenPixel);
       } 
@@ -25,22 +27,28 @@ function darkenPixel() {
 }
 
 function changeGrid(){
-    let enteredValue = window.prompt("Enter grid size i.e. 16 or 32");
-    if (enteredValue < 2 || enteredValue > 100) {
-        alert("Value has to be inbetween 2 and 100");
+    let enteredValue = window.prompt("Enter grid size i.e. 16 or 32, value has to be inbetween 4 and 64");
+    if (enteredValue < 4 || enteredValue > 64) {
+        alert("Value has to be inbetween 4 and 64");
     } else {
         pixelCount = enteredValue;
-        resetGrid(pixelCount)
+        resetGrid(pixelCount);
     }
 }
 
-
-
-function resetGrid(pixelCount) {
+const resetGrid = function(pixelCount) { 
     while(grid.hasChildNodes()){
         grid.removeChild(grid.lastChild);
     }
-    createGrid(pixelCount);
+    createGrid(pixelCount);    
 }
+
+resetBtn.addEventListener('click', () => {
+    resetGrid(32);
+});
+
+chooseGridBtn.addEventListener('click', () => {
+    changeGrid();
+})
 
 createGrid(pixelCount);
